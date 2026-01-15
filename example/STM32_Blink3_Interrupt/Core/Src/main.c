@@ -106,15 +106,15 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint32_t now = 0, last_blink = 0;
+  uint32_t now = 0, next_blink = 500;
 
   while (1)
   {
 	  now = HAL_GetTick();
 
-	  if (now - last_blink >= blink_delays[blink_delay]){
+	  if (now >= next_blink) {
 		  HAL_GPIO_TogglePin(LED_RED_D4_GPIO_Port, LED_RED_D4_Pin);
-		  last_blink = now;
+		  next_blink = now + blink_delays[blink_delay];
 	  }
 
 	  if (btn_press == 1) {
